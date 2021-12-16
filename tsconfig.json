@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "resources/*"
+            ],
+        }
+    },
+    "include": [
+        "resources/**/*.ts",
+        "resources/**/*.vue",
+        "tests/js/**/*.ts",
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
