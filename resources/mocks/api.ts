@@ -1,4 +1,5 @@
-export const users = [
+
+export const users: { id: number, name: string }[] = [
   {
     id: 1,
     name: 'Asur Bernardo',
@@ -13,7 +14,7 @@ export const users = [
   },
 ];
 
-export const propertyTypes = [
+export const propertyTypes: { id: number, name: string }[] = [
   {
     id: 1,
     name: 'home',
@@ -28,7 +29,7 @@ export const propertyTypes = [
   },
 ];
 
-export const properties = [
+export const properties: { id: number, userId: number, typeId: number, name: string, rentedFrom: Date | null, rentedTo: Date | null }[] = [
   {
     id: 1,
     userId: 1,

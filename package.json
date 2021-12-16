@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node_modules/.bin/vue-cli-service serve resources/main.js",
-    "build": "node_modules/.bin/vue-cli-service build resources/main.js",
+    "start": "node_modules/.bin/vue-cli-service serve resources/main.ts",
+    "build": "node_modules/.bin/vue-cli-service build resources/main.ts",
     "test:unit": "jest",
     "lint": "node_modules/.bin/vue-cli-service lint resources"
   },
@@ -14,16 +14,21 @@
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.3"
+    "vue-class-component": "^7.2.6",
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-typescript": "^4.5.15",
     "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-typescript": "^9.1.0",
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "chokidar": "^3.5.2",
@@ -32,7 +37,8 @@
     "eslint-plugin-vue": "^6.2.2",
     "postcss-cli": "^9.1.0",
     "postcss-loader": "^6.2.1",
-    "typescript": "^4.5.3",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
     "vue-template-compiler": "^2.6.11"
   }
 }
