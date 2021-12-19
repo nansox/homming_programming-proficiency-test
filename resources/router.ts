@@ -12,6 +12,6 @@ export default new Router({
                 { path: 'properties', component: PropertiesMainView }
             ]
         },
-        { path: '/', redirect: '/home' }
+        { path: '/', redirect: '/home/properties' }
     ],
 });
