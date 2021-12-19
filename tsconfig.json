@@ -1,20 +1,31 @@
 {
     "compilerOptions": {
-        "importHelpers": true,
-        "esModuleInterop": true,
         "sourceMap": true,
+        "experimentalDecorators": true,
         "resolveJsonModule": true,
         "target": "esnext",
         "module": "esnext",
-        "strict": true,
         "moduleResolution": "node",
         "baseUrl": ".",
         "paths": {
             "@/*": [
                 "resources/*"
             ],
-        }
+        },
+        "types": [
+            "webpack-env",
+            "jest",
+            "webpack"
+        ],
+        "noImplicitAny": false,
+        "allowUnusedLabels": true,
     },
+    "lib": [
+        "esnext",
+        "dom",
+        "dom.iterable",
+        "scripthost"
+    ],
     "include": [
         "resources/**/*.ts",
         "resources/**/*.vue",

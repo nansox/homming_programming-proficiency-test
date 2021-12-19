@@ -22,5 +22,7 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "no-debugger": 0,
+        "no-unused-vars": 0
     }
 };
