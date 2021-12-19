@@ -1,5 +1,6 @@
+import { Property, PropertyType, User } from "@/mocks/api-types"
 
-export const users: { id: number, name: string }[] = [
+export const users: User[] = [
   {
     id: 1,
     name: 'Asur Bernardo',
@@ -14,7 +15,7 @@ export const users: { id: number, name: string }[] = [
   },
 ];
 
-export const propertyTypes: { id: number, name: string }[] = [
+export const propertyTypes: PropertyType[] = [
   {
     id: 1,
     name: 'home',
@@ -29,7 +30,7 @@ export const propertyTypes: { id: number, name: string }[] = [
   },
 ];
 
-export const properties: { id: number, userId: number, typeId: number, name: string, rentedFrom: Date | null, rentedTo: Date | null }[] = [
+export const properties: Property[] = [
   {
     id: 1,
     userId: 1,

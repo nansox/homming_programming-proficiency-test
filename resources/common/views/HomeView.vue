@@ -1,24 +1,20 @@
 <template>
-  <section class="home">
+  <main class="home h-full flex flex-col">
     <header class="bg-orange-200 h-20 flex items-center justify-center">
       <homming-logo class="h-8" />
     </header>
-    home
-  </section>
+    <router-view></router-view>
+  </main>
 </template>
 
-<script>
-import Vue from "vue";
-import Component from "vue-class-component";
-
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import HommingLogo from "@/common/components/icons/homming-logo.vue";
 
 @Component({
-  components: {
-    HommingLogo,
-  },
+  components: { HommingLogo },
 })
-export default class Home extends Vue {}
+export default class HomeView extends Vue {}
 </script>
 <style>
 .home > header {
