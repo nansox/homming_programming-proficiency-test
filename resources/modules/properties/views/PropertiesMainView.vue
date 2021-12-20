@@ -3,10 +3,14 @@
     v-if="dataReady"
     class="properties-main-view flex flex-col flex-grow items-center"
   >
-    <h3 class="text-xl mt-8 font-medium italic">Properties</h3>
+    <h3 class="text-xl mt-8 mb-3 font-medium italic">Properties</h3>
+    <ho-properties-table-filters
+      @change="(data) => updateLocalFilters(data)"
+      @changeUser="updateUser"
+    />
     <ho-table
       class="properties-main-view_ho-table w-fit m-5 mt-8"
-      :items="mappedProperties"
+      :items="mappedFilterProperties"
       :fields="tableFields"
     >
       <template v-slot:cell="{ item, field }">
@@ -23,19 +27,29 @@
 </template>
 
 <script lang="ts">
-import HoSpinner from "@/common/components/molecules/ho-spinner.vue";
+import HoSpinner from "@/common/components/atoms/ho-spinner.vue";
 import HoTable, {
   HoTableField,
 } from "@/common/components/molecules/ho-table.vue";
 import { Property } from "@/mocks/api-types";
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { namespace } from "vuex-class";
+import HoPropertiesTableFilters from "../components/ho-properties-table-filters.vue";
 import HoRentedTag from "../components/ho-rented-tag.vue";
 import { PROPERTIES_HANDLER_STATE } from "../store/properties-handler";
 
+export interface PropertiesTableFilters {
+  type?: null | string;
+  user?: null | string;
+  dateFrom?: null | Date;
+  dateTo?: null | Date;
+}
+
 const PropertiesHandler = namespace("PropertiesHandler");
 
-@Component({ components: { HoSpinner, HoTable, HoRentedTag } })
+@Component({
+  components: { HoSpinner, HoTable, HoRentedTag, HoPropertiesTableFilters },
+})
 export default class PropertiesMainView extends Vue {
   @PropertiesHandler.Getter
   public PropertiesHandlerState!: PROPERTIES_HANDLER_STATE;
@@ -54,12 +68,48 @@ export default class PropertiesMainView extends Vue {
     { key: "isRented", label: "" },
   ];
 
+  public localFilters: PropertiesTableFilters = {
+    type: null,
+    user: null,
+    dateFrom: null,
+    dateTo: null,
+  };
+
   get dataReady() {
     return this.PropertiesHandlerState === PROPERTIES_HANDLER_STATE.DONE;
   }
 
-  get mappedProperties() {
-    return this.Properties.map((el) => ({
+  get filterProperties() {
+    let returnedProperties = this.Properties;
+
+    if (this.localFilters.type != null && this.localFilters.type !== "") {
+      returnedProperties = returnedProperties.filter((el) => {
+        return `${el.typeId}` === `${this.localFilters.type}`;
+      });
+    }
+    if (this.localFilters.user != null && this.localFilters.user !== "") {
+      returnedProperties = returnedProperties.filter((el) => {
+        return `${this.localFilters.user}`.includes(`${el.userId}`);
+      });
+    }
+    if (this.localFilters.dateFrom != null) {
+      returnedProperties = returnedProperties.filter((el) => {
+        return (
+          el.rentedFrom !== null && el.rentedFrom >= this.localFilters.dateFrom
+        );
+      });
+    }
+    if (this.localFilters.dateTo != null) {
+      returnedProperties = returnedProperties.filter((el) => {
+        return el.rentedTo !== null && el.rentedTo <= this.localFilters.dateTo;
+      });
+    }
+
+    return returnedProperties;
+  }
+
+  get mappedFilterProperties() {
+    return this.filterProperties.map((el) => ({
       ...el,
       rentedFrom: this.stringFromDate(el.rentedFrom),
       rentedTo: this.stringFromDate(el.rentedTo),
@@ -77,12 +127,19 @@ export default class PropertiesMainView extends Vue {
     if (date == null) return "";
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
+
+  updateUser(user: string | number) {
+    if (this.$route.path !== `/home/properties/${user}`) {
+      this.$router.push(`/home/properties/${user}`);
+    }
+  }
+
+  updateLocalFilters(data: PropertiesTableFilters) {
+    this.localFilters = data;
+  }
+
   created() {
     this.fetchProperties();
   }
 }
 </script>
-<style scoped>
-.properties-main-view > .properties-main-view_ho-table {
-}
-</style>

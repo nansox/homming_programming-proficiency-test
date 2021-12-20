@@ -8,5 +8,13 @@ export default {
             rentedFrom: "Rented From",
             rentedTo: "Rented To",
         }
+    },
+    properties: {
+        filters: {
+            type: 'Type',
+            user: 'User',
+            rentedFrom: 'Rented From',
+            rentedTo: 'Rented To',
+        }
     }
 }
