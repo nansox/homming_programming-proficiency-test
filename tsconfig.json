@@ -18,7 +18,7 @@
             "webpack"
         ],
         "noImplicitAny": false,
-        "allowUnusedLabels": true,
+        "allowUnusedLabels": true
     },
     "lib": [
         "esnext",

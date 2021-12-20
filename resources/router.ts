@@ -9,7 +9,8 @@ export default new Router({
     routes: [
         {
             path: '/home', component: Home, children: [
-                { path: 'properties', component: PropertiesMainView }
+                { path: 'properties', component: PropertiesMainView },
+                { path: 'properties/:user', component: PropertiesMainView }
             ]
         },
         { path: '/', redirect: '/home/properties' }
