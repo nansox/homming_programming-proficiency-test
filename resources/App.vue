@@ -1,18 +1,17 @@
 <template>
-  <div id="app">
-    WORK HERE
+  <div id="app" class="h-full">
+    <router-view></router-view>
   </div>
 </template>
 
-<script>
-import { users, propertyTypes, properties } from '@/mocks/api';
+<script lang="ts">
+import { users, propertyTypes, properties } from "@/mocks/api";
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
-  name: 'App',
-  data: () => ({
-    users,
-    propertyTypes,
-    properties,
-  }),
-};
+@Component
+export default class App extends Vue {
+  users: any = users;
+  propertyTypes: any = propertyTypes;
+  properties: any = properties;
+}
 </script>
